@@ -18,7 +18,9 @@ namespace ProyectoMatriz
             {
                 try
                 {
-                    bool Si = false;
+                    //bool Si = false;
+                    bool Volver = false;
+                    bool Regresar = false;
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("\n  ██████╗ ██████╗ ███╗   ██╗██╗   ██╗███████╗██████╗ ████████╗ ██████╗ ██████╗ ");
@@ -44,8 +46,10 @@ namespace ProyectoMatriz
                     switch (OpcionPrimerMenu)
                     {
                         case 1:
-                            while (!Si)
+                            while (!Volver)
                             {
+                                Regresar = false;
+                                Console.ForegroundColor = ConsoleColor.Cyan;
                                 //Caso de matriz 3x3
                                 //Se piden los valores de la matriz 
                                 matriz3.PedirMatriz();
@@ -54,96 +58,124 @@ namespace ProyectoMatriz
                                 Determinante = matriz3.CalculoDeterminante();
                                 matriz3.AnadirDeterminante(Determinante);
 
-                                //Se presenta la matriz ingresada y se ofrecen opciones por si esta es incorrecta
-                                matriz3.VerificarMatriz();
-                                Console.WriteLine("\n ---------------------------------------------- ");
-                                Console.WriteLine("\n  ► 1.  -      Si       ");
-                                Console.WriteLine("  ► 2.  -      No       \n");
-                                Console.WriteLine("  ► 3.  -      Volver     \n");
-                                Console.WriteLine("╚══════════════════════════════════════════════╝");
-                                int Opcion1 = Convert.ToInt32(Console.ReadLine());
-
-                                if (Opcion1 == 1)
+                                while (!Regresar)
                                 {
-                                    if (Determinante == 0)
+                                    try
                                     {
-                                        //En caso que el determinante de una matriz resulte 0, la matriz no tendra inversa
-                                        Console.Clear();
-                                        Console.WriteLine("La determinante resulto 0, por lo tanto, la matriz ingresada no tiene inversa\n");
-                                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                        Console.WriteLine("\nClick para volver al menu principal!");
-                                        Console.ReadKey();
-                                        Si = true;
-                                    }
-                                    else
-                                    {
-                                        matriz3.CalculoAdjunta();
-                                        matriz3.CalculoInversa();
-                                        matriz3.ImprimirMatriz();
-                                        Si = true;
-                                    }
+                                        //Se presenta la matriz ingresada y se ofrecen opciones por si esta es incorrecta
+                                        matriz3.VerificarMatriz();
+                                        Console.WriteLine("\n ---------------------------------------------- ");
+                                        Console.WriteLine("\n  ► 1.  -      Si       ");
+                                        Console.WriteLine("  ► 2.  -      No       \n");
+                                        Console.WriteLine("  ► 3.  -      Volver     \n");
+                                        Console.WriteLine("╚══════════════════════════════════════════════╝");
+                                        int Opcion1 = Convert.ToInt32(Console.ReadLine());
 
-                                }
-                                else if (Opcion1 == 2)
-                                {
-                                    Console.Clear();
-                                }
-                                else if(Opcion1 == 3)
-                                {
-                                    Si = true;
-                                }
-                                else
-                                {
-                                    MensajeError();
+                                        if (Opcion1 == 1)
+                                        {
+                                            if (Determinante == 0)
+                                            {
+                                                //En caso que el determinante de una matriz resulte 0, la matriz no tendra inversa
+                                                Console.Clear();
+                                                Console.WriteLine("La determinante resulto 0, por lo tanto, la matriz ingresada no tiene inversa\n");
+                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                Console.WriteLine("\nClick para volver al menu principal!");
+                                                Console.ReadKey();
+                                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                                Volver = true;
+                                                Regresar = true;
+                                            }
+                                            else
+                                            {
+                                                matriz3.CalculoAdjunta();
+                                                matriz3.CalculoInversa();
+                                                matriz3.ImprimirMatriz();
+                                                Volver = true;
+                                                Regresar = true;
+                                            }
+
+                                        }
+                                        else if (Opcion1 == 2)
+                                        {
+                                            Console.Clear();
+                                            Regresar = true;
+                                        }
+                                        else if (Opcion1 == 3)
+                                        {
+                                            Volver = true;
+                                            Regresar = true;
+                                        }
+                                        else
+                                        {
+                                            MensajeError();
+                                        }
+                                    }
+                                    catch (FormatException) { MensajeError(); }
+                                    catch (OverflowException) { MensajeError(); }
                                 }
                             }
                             break;
                         case 2:
-                            while (!Si)
+                            while (!Volver)
                             {
+                                Regresar = false;
+                                Console.ForegroundColor = ConsoleColor.Cyan;
                                 matriz2.PedirMatriz();
                                 Determinante = matriz2.CalcularDeterminante();
                                 matriz2.AnadirDeterminante(Determinante);
 
-                                matriz2.VerificarMatriz();
-                                Console.WriteLine("\n ---------------------------------------------- ");
-                                Console.WriteLine("\n  ► 1.  -      Si       ");
-                                Console.WriteLine("  ► 2.  -      No       \n");
-                                Console.WriteLine("  ► 3.  -      Volver     \n");
-                                Console.WriteLine("╚══════════════════════════════════════════════╝");
-                                int Opcion1 = Convert.ToInt32(Console.ReadLine());
+                                while (!Regresar)
+                                {
+                                    try
+                                    {
+                                        matriz2.VerificarMatriz();
+                                        Console.WriteLine("\n ---------------------------------------------- ");
+                                        Console.WriteLine("\n  ► 1.  -      Si       ");
+                                        Console.WriteLine("  ► 2.  -      No       \n");
+                                        Console.WriteLine("  ► 3.  -      Volver     \n");
+                                        Console.WriteLine("╚══════════════════════════════════════════════╝");
+                                        int Opcion1 = Convert.ToInt32(Console.ReadLine());
 
-                                if (Opcion1 == 1)
-                                {
-                                    if (Determinante == 0)
-                                    {
-                                        //En caso que el determinante de una matriz resulte 0, la matriz no tendra inversa
-                                        Console.Clear();
-                                        Console.WriteLine("La determinante resulto 0, por lo tanto, la matriz ingresada no tiene inversa\n");
-                                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                                        Console.WriteLine("\nClick para volver al menu principal!");
-                                        Console.ReadKey();
-                                        Si = true;
+                                        if (Opcion1 == 1)
+                                        {
+                                            if (Determinante == 0)
+                                            {
+                                                //En caso que el determinante de una matriz resulte 0, la matriz no tendra inversa
+                                                Console.Clear();
+                                                Console.WriteLine("La determinante resulto 0, por lo tanto, la matriz ingresada no tiene inversa\n");
+                                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                                Console.WriteLine("\nClick para volver al menu principal!");
+                                                Console.ReadKey();
+                                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                                Volver = true;
+                                                Regresar = true;
+                                            }
+                                            else
+                                            {
+                                                matriz2.CalculoAdjunta();
+                                                matriz2.CalculoInversa();
+                                                matriz2.ImprimirMatriz();
+                                                Volver = true;
+                                                Regresar = true;
+                                            }
+                                        }
+                                        else if (Opcion1 == 2)
+                                        {
+                                            Console.Clear();
+                                            Regresar = true;
+                                        }
+                                        else if (Opcion1 == 3)
+                                        {
+                                            Volver = true;
+                                            Regresar = true;
+                                        }
+                                        else
+                                        {
+                                            MensajeError();
+                                        }
                                     }
-                                    else
-                                    {
-                                        matriz2.CalculoAdjunta();
-                                        matriz2.CalculoInversa();
-                                        matriz2.ImprimirMatriz();
-                                        Si = true;
-                                    }
-                                }
-                                else if (Opcion1 == 2)
-                                {
-                                    Console.Clear();
-                                }
-                                else if (Opcion1 == 3)
-                                {
-                                    Si = true;
-                                }
-                                else
-                                {
-                                    MensajeError();
+                                    catch (FormatException) { MensajeError(); }
+                                    catch (OverflowException) { MensajeError(); }
                                 }
                             }
                             break;
@@ -156,14 +188,8 @@ namespace ProyectoMatriz
                             break;
                     }
                 }
-                catch (FormatException)
-                {
-                    MensajeError();
-                }
-                catch (OverflowException)
-                {
-                    MensajeError();
-                }
+                catch (FormatException){MensajeError();}
+                catch (OverflowException){MensajeError();}
 
             } while (!Salir);
         }
@@ -174,7 +200,7 @@ namespace ProyectoMatriz
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Error! Opcion invalida");
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.ReadKey();
         }
     }
